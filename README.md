@@ -18,7 +18,7 @@ Project structure
 
 Designated Endpoints
 --------------------
-Swagger2 (additional component included in the project) generated doc:
+Swagger2 (additional component included in the project) generated doc:  
 [http://localhost:8080/swagger-ui.html#/](http://localhost:8080/swagger-ui.html#/)
 ![](images/swagger1.png)
 
@@ -50,9 +50,8 @@ HAL browser (additional embedded browser included in the project, which provide 
 [http://localhost:8080/browser/index.html#/vehicles/show/1](http://localhost:8080/browser/index.html#/vehicles/show/1)
 ![](images/HAL_browser2.png)
 
-
+IntelliJ REST API assistant tool:  
 ![](images/IntelliJ%20Menu%20-%20Test%20REST%20API%20plugin.png)
-
 
 ![](images/IntelliJ%20Test%20REST%20API%20plugin.png)
 
