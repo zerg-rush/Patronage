@@ -16,9 +16,17 @@ Project structure
 ![](images/Project%20structure.png)
 
 
+Updated project structure with three brand new class-level validation constrains (for plate number, first registration and registration date) and Enum classes (for engine fuel type, gender and ID number type):
+
+![](images/Project%20structure%202.png)
+
+
 Designated Endpoints
 --------------------
-Swagger2 (additional component included in the project) generated doc:  
+Swagger2 REST API specification file (available to download at [http://localhost:8080/v2/api-docs](http://localhost:8080/v2/api-docs))
+![](images/swagger-api-docs.png)
+
+Swagger2 (additional frontend component included in the project) generated doc:  
 [http://localhost:8080/swagger-ui.html#/](http://localhost:8080/swagger-ui.html#/)
 ![](images/swagger1.png)
 
@@ -42,7 +50,7 @@ Swagger2 (additional component included in the project) generated doc:
 
 ![](images/swagger11.png)
 
-HAL browser (additional embedded browser included in the project, which provide basic UI do accessing REST API, https://github.com/mikekelly/hal-browser):
+HAL browser (additional embedded browser included in the project, which provide basic UI for accessing REST API, https://github.com/mikekelly/hal-browser):
 
 [http://localhost:8080/browser/index.html#/](http://localhost:8080/browser/index.html#/)
 ![](images/HAL_browser1.png)
@@ -54,6 +62,11 @@ IntelliJ REST API assistant tool:
 ![](images/IntelliJ%20Menu%20-%20Test%20REST%20API%20plugin.png)
 
 ![](images/IntelliJ%20Test%20REST%20API%20plugin.png)
+
+Environment variable H2_STORAGE_ENABLED set to false in IntelliJ IDE (for tests):
+--------------------------------------------------------------------------------
+![](images/environment%20setting%20for%20H2%20in%20IntelliJ.png)
+
 
 1) Simplest one with interner browser
 
