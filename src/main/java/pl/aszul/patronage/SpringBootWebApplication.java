@@ -27,12 +27,12 @@ import java.util.Arrays;
 @ComponentScan(basePackageClasses=VehicleCrudRepository.class)
 public class SpringBootWebApplication {
     public static void main(String[] args) {
-        ConfigurableApplicationContext context = SpringApplication.run(SpringBootWebApplication.class, args);
+        //ConfigurableApplicationContext context =
+                SpringApplication.run(SpringBootWebApplication.class, args);
 
-        String[] beans = context.getBeanNamesForType(PersonService.class);
+/*        String[] beans = context.getBeanNamesForType(PersonService.class);
         System.out.println("PersonService beans = " + Arrays.toString(beans));
-
-        context.close();
+        context.close();*/
     }
 }
 
