@@ -34,11 +34,12 @@ public class PersonController {
         this.personService = personService;
     }
 
-    @Autowired
+    // to be used for conditional annotation for HashMap mode
+/*    @Autowired
     @Conditional(StorageHashMapSelectedConfig.class)
     public void setPersonService(PersonServiceHashMap personService) {
         this.personService = personService;
-    }
+    }*/
 
     @ApiOperation(value = "View a list of available persons", response = Iterable.class)
     @ApiResponses(value = {

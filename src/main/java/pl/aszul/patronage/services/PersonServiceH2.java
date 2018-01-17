@@ -18,12 +18,13 @@ public class PersonServiceH2 implements PersonService {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     private PersonCrudRepository personCrudRepository;
 
-    @Autowired
+    // to be used for conditional annotation for HashMap mode
+/*    @Autowired
  //   @Qualifier("H2Bean")
-//    @Conditional(StorageH2SelectedConfig.class)
+    @Conditional(StorageH2SelectedConfig.class)
     public void setPersonCrudRepository(PersonCrudRepository personCrudRepository) {
         this.personCrudRepository = personCrudRepository;
-    }
+    }*/
 
     @Override
     public Iterable<Person> listAllPersons() {

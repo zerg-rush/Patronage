@@ -3,6 +3,7 @@ package pl.aszul.patronage.domain;
 import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.validator.constraints.Email;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
+import javax.persistence.*;
 import pl.aszul.patronage.domain.enums.Gender;
 import pl.aszul.patronage.domain.enums.IDNumberType;
 
@@ -11,11 +12,18 @@ import java.time.LocalDate;
 /**
  This is a class for representing a person
  */
-@EntityScan
+@Entity
 public class Person {
     private static Integer idGenerator = 0;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @ApiModelProperty(notes = "The database generated product ID")
     private Integer id;
+
+    @Version
+    @ApiModelProperty(notes = "The auto-generated version of the person")
+    private Integer version;
 
     @ApiModelProperty(notes = "surename of person")
     private String surname;
@@ -64,6 +72,14 @@ public class Person {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Integer getVersion() {
+        return version;
+    }
+
+    public void setVersion(Integer version) {
+        this.version = version;
     }
 
     public String getSurname() {

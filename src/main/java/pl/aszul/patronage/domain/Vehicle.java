@@ -1,13 +1,11 @@
 package pl.aszul.patronage.domain;
 
 import java.time.LocalDate;
-// import java.util.Date;
-
 import javax.validation.constraints.*;
 import org.hibernate.validator.constraints.Range;
 import io.swagger.annotations.ApiModelProperty;
-
-import org.springframework.boot.autoconfigure.domain.EntityScan;
+// import org.springframework.boot.autoconfigure.domain.EntityScan;
+import javax.persistence.*;
 import pl.aszul.patronage.domain.enums.FuelType;
 import pl.aszul.patronage.domain.validation.ValidFirstRegistrationDate;
 import pl.aszul.patronage.domain.validation.ValidPlateNumber;
@@ -19,12 +17,18 @@ import pl.aszul.patronage.domain.validation.ValidRegistrationCardIssueDate;
 @ValidPlateNumber
 @ValidFirstRegistrationDate
 @ValidRegistrationCardIssueDate
-@EntityScan
+@Entity
 public class Vehicle {
     private static Integer idGenerator = 0;
 
-    @ApiModelProperty(notes = "The database generated product ID")
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @ApiModelProperty(notes = "The database generated vehicle ID")
     private Integer id;
+
+    @Version
+    @ApiModelProperty(notes = "The auto-generated version of the vehicle")
+    private Integer version;
 
     @ApiModelProperty(notes = "rodzaj pojazdu")
     private String vehicleType;
@@ -130,8 +134,6 @@ public class Vehicle {
     private String maxWeightWTrailerWOBreaks;
 
     @NotNull(message = "The engine capacity can not be null")
-//    @Min(value = 50, message = "The engine capacity must be bigger than ${value} cm3")
-//    @Max(value = 6999, message = "The engine capacity must be less than ${value} cm3")
     @Range(min = 50, max = 6999, message = "The engine capacity must be bigger than ${min} and less than ${max} [cm3]")
     @ApiModelProperty(notes = "P.1 — pojemność silnika [cm3]")
     private Integer engineCapacity;
@@ -145,8 +147,6 @@ public class Vehicle {
     @ApiModelProperty(notes = "Q — stosunek mocy do masy własnej (dotyczy motocykli i motorowerów) [kW/kg]")
     private String powerToWeightRatio;
 
-//    @Min(value = 1, message = "Car must have at least ${value} seat")
-//    @Max(value = 6, message = "Car must have at most ${value} seats")
     @Range(min = 1, max = 6, message = "Car must have more than ${min} and less than ${max} seats!")
     @ApiModelProperty(notes = "S.1 — liczba miejsc siedzących, włączając siedzenie kierowcy")
     private Integer seats;
@@ -234,6 +234,14 @@ public class Vehicle {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Integer getVersion() {
+        return version;
+    }
+
+    public void setVersion(Integer version) {
+        this.version = version;
     }
 
     public String getVehicleType() {
