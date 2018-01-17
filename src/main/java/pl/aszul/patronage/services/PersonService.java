@@ -3,11 +3,11 @@ package pl.aszul.patronage.services;
 import pl.aszul.patronage.domain.Person;
 
 public interface PersonService {
-    Iterable<Person> listAllPersons();
+    Iterable<Person> list();
 
-    Person getPersonById(Integer id);
+    Person create(Person person);
 
-    Person savePerson(Person person);
+    Person read(Integer id);
 
-    void deletePerson(Integer id);
+    void delete(Integer id);
 }

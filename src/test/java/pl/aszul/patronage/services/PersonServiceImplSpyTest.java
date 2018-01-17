@@ -26,15 +26,15 @@ public class PersonServiceImplSpyTest {
     @Test(expected=NullPointerException.class)
     public void shouldThrowNullPointerException_whenGetPersonByIdIsCalledWithoutContext() throws Exception {
         //Act
-        Person retrievedPerson = personServiceSpy.getPersonById(5);
+        Person retrievedPerson = personServiceSpy.read(5);
         //Assert
         assertThat(retrievedPerson, is(equalTo(person)));
     }
 
     public void shouldThrowNullPointerException_whenSavePersonIsCalledWithoutContext() throws Exception {
         //Act
-        personServiceSpy.savePerson(person);
-        Person savedPerson = personServiceSpy.getPersonById(person.getId());
+        personServiceSpy.create(person);
+        Person savedPerson = personServiceSpy.read(person.getId());
         //Assert
         assertThat(savedPerson, is(equalTo(person)));
     }
@@ -42,20 +42,20 @@ public class PersonServiceImplSpyTest {
     @Test
     public void shouldVerifyThatGetPersonByIdIsCalled() throws Exception {
         //Arrange
-        Mockito.doReturn(person).when(personServiceSpy).getPersonById(5);
+        Mockito.doReturn(person).when(personServiceSpy).read(5);
         //Act
-        Person retrievedPerson = personServiceSpy.getPersonById(5);
+        Person retrievedPerson = personServiceSpy.read(5);
         //Assert
-        Mockito.verify(personServiceSpy).getPersonById(5);
+        Mockito.verify(personServiceSpy).read(5);
     }
 
     @Test
     public void shouldVerifyThatSavePersonIsNotCalled() throws Exception {
         //Arrange
-        Mockito.doReturn(person).when(personServiceSpy).getPersonById(5);
+        Mockito.doReturn(person).when(personServiceSpy).read(5);
         //Act
-        Person retrievedPerson = personServiceSpy.getPersonById(5);
+        Person retrievedPerson = personServiceSpy.read(5);
         //Assert
-        Mockito.verify(personServiceSpy,never()).savePerson(person);
+        Mockito.verify(personServiceSpy,never()).create(person);
     }
 }

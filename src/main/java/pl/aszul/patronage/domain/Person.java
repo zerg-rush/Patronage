@@ -2,7 +2,6 @@ package pl.aszul.patronage.domain;
 
 import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.validator.constraints.Email;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
 import javax.persistence.*;
 import pl.aszul.patronage.domain.enums.Gender;
 import pl.aszul.patronage.domain.enums.IDNumberType;

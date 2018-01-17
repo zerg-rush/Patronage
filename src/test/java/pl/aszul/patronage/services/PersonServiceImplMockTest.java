@@ -29,7 +29,7 @@ public class PersonServiceImplMockTest {
     @Test
     public void shouldReturnPerson_whenGetPersonByIdIsCalled() throws Exception {
         // Act
-        Person retrievedPerson = personService.getPersonById(5);
+        Person retrievedPerson = personService.read(5);
         // Assert
         assertThat(retrievedPerson, is(equalTo(person)));
 
@@ -38,7 +38,7 @@ public class PersonServiceImplMockTest {
     @Test
     public void shouldReturnPerson_whenSavePersonIsCalled() throws Exception {
         // Act
-        Person savedPerson = personService.savePerson(person);
+        Person savedPerson = personService.create(person);
         // Assert
         assertThat(savedPerson, is(equalTo(person)));
     }
@@ -46,8 +46,8 @@ public class PersonServiceImplMockTest {
     @Test
     public void shouldCallDeleteMethodOfProductRepository_whenDeleteProductIsCalled() throws Exception {
         // Act
-        personService.deletePerson(5);
+        personService.delete(5);
         // Assert
-        verify(personService, times(1)).deletePerson(5);
+        verify(personService, times(1)).delete(5);
     }
 }

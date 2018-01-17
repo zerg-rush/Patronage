@@ -1,8 +1,5 @@
 package pl.aszul.patronage.controllers;
 
-import org.springframework.context.annotation.Conditional;
-import pl.aszul.patronage.config.StorageH2SelectedConfig;
-import pl.aszul.patronage.config.StorageHashMapSelectedConfig;
 import pl.aszul.patronage.domain.Person;
 import pl.aszul.patronage.services.PersonService;
 
@@ -16,9 +13,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import pl.aszul.patronage.services.PersonServiceH2;
-import pl.aszul.patronage.services.PersonServiceHashMap;
-
 import javax.validation.Valid;
 
 @RestController
@@ -29,17 +23,9 @@ public class PersonController {
     private PersonService personService;
 
     @Autowired
-    @Conditional(StorageH2SelectedConfig.class)
-    public void setPersonService(PersonServiceH2 personService) {
+    public PersonController(PersonService personService) {
         this.personService = personService;
     }
-
-    // to be used for conditional annotation for HashMap mode
-/*    @Autowired
-    @Conditional(StorageHashMapSelectedConfig.class)
-    public void setPersonService(PersonServiceHashMap personService) {
-        this.personService = personService;
-    }*/
 
     @ApiOperation(value = "View a list of available persons", response = Iterable.class)
     @ApiResponses(value = {
@@ -52,7 +38,7 @@ public class PersonController {
     )
     @RequestMapping(value = "/list", method= RequestMethod.GET, produces = "application/json")
     public Iterable<Person> list(Model model){
-        Iterable<Person> personsList = personService.listAllPersons();
+        Iterable<Person> personsList = personService.list();
         return personsList;
     }
     @ApiOperation(value = "Show a person with an Id", response = Person.class)
@@ -60,7 +46,7 @@ public class PersonController {
     public ResponseEntity showPerson(@PathVariable Integer id, Model model){
         ResponseEntity<Person> response;
 
-        Person storedPerson = personService.getPersonById(id);
+        Person storedPerson = personService.read(id);
         if (storedPerson != null) {
             response = new ResponseEntity(storedPerson, HttpStatus.OK);
         } else {
@@ -71,7 +57,7 @@ public class PersonController {
     @ApiOperation(value = "Add a person")
     @RequestMapping(value = "/add", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
     public ResponseEntity addPerson(@Valid @RequestBody Person person){
-        personService.savePerson(person);
+        personService.create(person);
         return new ResponseEntity("Person successfully created", HttpStatus.CREATED);
     }
     @ApiOperation(value = "Update a person")
@@ -79,7 +65,7 @@ public class PersonController {
     public ResponseEntity<?> updatePerson(@PathVariable Integer id, @Valid @RequestBody Person person){
         ResponseEntity<?> response;
 
-        Person storedPerson = personService.getPersonById(id);
+        Person storedPerson = personService.read(id);
         if (storedPerson != null) {
             storedPerson.setSurname(person.getSurname());
             storedPerson.setName(person.getName());
@@ -89,7 +75,7 @@ public class PersonController {
             storedPerson.setPersonalIDNumberType(person.getPersonalIDNumberType());
             storedPerson.setTel(person.getTel());
             storedPerson.setEmail(person.getEmail());
-            personService.savePerson(storedPerson);
+            personService.create(storedPerson);
             response = new ResponseEntity<>("Person updated successfully", HttpStatus.OK);
         } else {
             response = new ResponseEntity<>("Person not found", HttpStatus.NOT_FOUND);
@@ -101,9 +87,9 @@ public class PersonController {
     public ResponseEntity<?> deletePerson(@PathVariable Integer id){
         ResponseEntity<?> response;
 
-        Person storedPerson = personService.getPersonById(id);
+        Person storedPerson = personService.read(id);
         if (storedPerson != null) {
-            personService.deletePerson(id);
+            personService.delete(id);
             response = new ResponseEntity<>("Person deleted successfully", HttpStatus.OK);
         } else {
             response = new ResponseEntity<>("Person not found", HttpStatus.NOT_FOUND);

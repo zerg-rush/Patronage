@@ -26,14 +26,14 @@ public class VehicleServiceHashMapSpyTest {
     @Test(expected=NullPointerException.class)
     public void shouldThrowNullPointerException_whenGetVehicleByIdIsCalledWithoutContext() throws Exception {
         //Act
-        Vehicle retrievedVehicle = vehicleServiceSpy.getVehicleById(5);
+        Vehicle retrievedVehicle = vehicleServiceSpy.read(5);
         //Assert
         assertThat(retrievedVehicle, is(equalTo(vehicle)));
     }
 
     public void shouldThrowNullPointerException_whenSaveVehicleIsCalledWithoutContext() throws Exception {
         //Act
-        Vehicle savedVehicle = vehicleServiceSpy.saveVehicle(vehicle);
+        Vehicle savedVehicle = vehicleServiceSpy.create(vehicle);
         //Assert
         assertThat(savedVehicle, is(equalTo(vehicle)));
     }
@@ -41,20 +41,20 @@ public class VehicleServiceHashMapSpyTest {
     @Test
     public void shouldVerifyThatGetVehicleByIdIsCalled() throws Exception {
         //Arrange
-        Mockito.doReturn(vehicle).when(vehicleServiceSpy).getVehicleById(5);
+        Mockito.doReturn(vehicle).when(vehicleServiceSpy).read(5);
         //Act
-        Vehicle retrievedVehicle = vehicleServiceSpy.getVehicleById(5);
+        Vehicle retrievedVehicle = vehicleServiceSpy.read(5);
         //Assert
-        Mockito.verify(vehicleServiceSpy).getVehicleById(5);
+        Mockito.verify(vehicleServiceSpy).read(5);
     }
 
     @Test
     public void shouldVerifyThatSaveVehicleIsNotCalled() throws Exception {
         //Arrange
-        Mockito.doReturn(vehicle).when(vehicleServiceSpy).getVehicleById(5);
+        Mockito.doReturn(vehicle).when(vehicleServiceSpy).read(5);
         //Act
-        Vehicle retrievedVehicle = vehicleServiceSpy.getVehicleById(5);
+        Vehicle retrievedVehicle = vehicleServiceSpy.read(5);
         //Assert
-        Mockito.verify(vehicleServiceSpy,never()).saveVehicle(vehicle);
+        Mockito.verify(vehicleServiceSpy,never()).create(vehicle);
     }
 }

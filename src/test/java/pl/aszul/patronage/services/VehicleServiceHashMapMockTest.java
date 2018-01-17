@@ -29,7 +29,7 @@ public class VehicleServiceHashMapMockTest {
     @Test
     public void shouldReturnVehicle_whenGetVehicleByIdIsCalled() throws Exception {
         // Act
-        Vehicle retrievedVehicle = vehicleService.getVehicleById(5);
+        Vehicle retrievedVehicle = vehicleService.read(5);
         // Assert
         assertThat(retrievedVehicle, is(equalTo(vehicle)));
 
@@ -38,7 +38,7 @@ public class VehicleServiceHashMapMockTest {
     @Test
     public void shouldReturnVehicle_whenSaveVehicleIsCalled() throws Exception {
         // Act
-        Vehicle savedVehicle = vehicleService.saveVehicle(vehicle);
+        Vehicle savedVehicle = vehicleService.create(vehicle);
         // Assert
         assertThat(savedVehicle, is(equalTo(vehicle)));
     }
@@ -46,8 +46,8 @@ public class VehicleServiceHashMapMockTest {
     @Test
     public void shouldCallDeleteMethodOfProductRepository_whenDeleteProductIsCalled() throws Exception {
         // Act
-        vehicleService.deleteVehicle(5);
+        vehicleService.delete(5);
         // Assert
-        verify(vehicleService, times(1)).deleteVehicle(5);
+        verify(vehicleService, times(1)).delete(5);
     }
 }

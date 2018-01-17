@@ -3,11 +3,11 @@ package pl.aszul.patronage.services;
 import pl.aszul.patronage.domain.Vehicle;
 
 public interface VehicleService {
-    Iterable<Vehicle> listAllVehicles();
+    Iterable<Vehicle> list();
 
-    Vehicle getVehicleById(Integer id);
+    Vehicle create(Vehicle vehicle);
 
-    Vehicle saveVehicle(Vehicle vehicle);
+    Vehicle read(Integer id);
 
-    void deleteVehicle(Integer id);
+    void delete(Integer id);
 }

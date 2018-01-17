@@ -2,18 +2,15 @@ package pl.aszul.patronage.controllers;
 
 import pl.aszul.patronage.domain.Vehicle;
 import pl.aszul.patronage.services.VehicleService;
-
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
 import javax.validation.Valid;
 
 @RestController
@@ -24,7 +21,7 @@ public class VehicleController {
     private VehicleService vehicleService;
 
     @Autowired
-    public void setVehicleService(VehicleService vehicleService) {
+    public VehicleController(VehicleService vehicleService) {
         this.vehicleService = vehicleService;
     }
 
@@ -39,7 +36,7 @@ public class VehicleController {
     )
     @RequestMapping(value = "/list", method = RequestMethod.GET, produces = "application/json")
     public Iterable<Vehicle> list(Model model){
-        Iterable<Vehicle> vehicleList = vehicleService.listAllVehicles();
+        Iterable<Vehicle> vehicleList = vehicleService.list();
         return vehicleList;
     }
 
@@ -49,7 +46,7 @@ public class VehicleController {
         // ResponseEntity<Vehicle> response = null;
         ResponseEntity<Vehicle> response;
 
-        Vehicle storedVehicle = vehicleService.getVehicleById(id);
+        Vehicle storedVehicle = vehicleService.read(id);
         if (storedVehicle != null) {
             response = new ResponseEntity(storedVehicle, HttpStatus.OK);
         } else {
@@ -61,7 +58,7 @@ public class VehicleController {
     @ApiOperation(value = "Add a vehicle")
     @RequestMapping(value = "/add", method = RequestMethod.POST, produces = "application/json")
     public ResponseEntity saveVehicle(@Valid @RequestBody Vehicle vehicle){
-        vehicleService.saveVehicle(vehicle);
+        vehicleService.create(vehicle);
         return new ResponseEntity("Vehicle saved successfully", HttpStatus.OK);
     }
 
@@ -71,7 +68,7 @@ public class VehicleController {
         // ResponseEntity<?> response = null;
         ResponseEntity<?> response;
 
-        Vehicle storedVehicle = vehicleService.getVehicleById(id);
+        Vehicle storedVehicle = vehicleService.read(id);
         if (storedVehicle != null) {
             storedVehicle.setVehicleType(vehicle.getVehicleType());
             storedVehicle.setVehiclePurpose(vehicle.getVehiclePurpose());
@@ -110,7 +107,7 @@ public class VehicleController {
             storedVehicle.setPowerToWeightRatio(vehicle.getPowerToWeightRatio());
             storedVehicle.setSeats(vehicle.getSeats());
             storedVehicle.setStandingPlaces(vehicle.getStandingPlaces());
-            vehicleService.saveVehicle(storedVehicle);
+            vehicleService.create(storedVehicle);
             response = new ResponseEntity<>("Vehicle updated successfully", HttpStatus.OK);
         } else {
             response = new ResponseEntity<>("Vehicle not found", HttpStatus.NOT_FOUND);
@@ -123,9 +120,9 @@ public class VehicleController {
     public ResponseEntity<?> deleteVehicle(@PathVariable Integer id){
         ResponseEntity<?> response;
 
-        Vehicle storedVehicle = vehicleService.getVehicleById(id);
+        Vehicle storedVehicle = vehicleService.read(id);
         if (storedVehicle != null) {
-            vehicleService.deleteVehicle(id);
+            vehicleService.delete(id);
             response = new ResponseEntity<>("Vehicle deleted successfully", HttpStatus.OK);
         } else {
             response = new ResponseEntity<>("Vehicle not found", HttpStatus.NOT_FOUND);

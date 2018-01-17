@@ -2,9 +2,7 @@ package pl.aszul.patronage.domain.validation;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
-
 import pl.aszul.patronage.domain.Vehicle;
-
 import java.time.LocalDate;
 
 public class ValidFirstRegistrationDateValidator
