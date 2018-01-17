@@ -1,10 +1,14 @@
 package pl.aszul.patronage.domain;
 
 import java.time.LocalDate;
-import javax.validation.constraints.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.PastOrPresent;
 import org.hibernate.validator.constraints.Range;
+import org.hibernate.validator.*;
 import io.swagger.annotations.ApiModelProperty;
-// import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import javax.persistence.*;
 import pl.aszul.patronage.domain.enums.FuelType;
 import pl.aszul.patronage.domain.validation.ValidFirstRegistrationDate;

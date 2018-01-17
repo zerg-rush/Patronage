@@ -18,11 +18,11 @@ public class VehicleServiceH2 implements VehicleService {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     private VehicleCrudRepository vehicleCrudRepository;
 
-/*    @Autowired
+    @Autowired
 //    @Conditional(StorageH2SelectedConfig.class)
     public void setVehicleCrudRepository(VehicleCrudRepository vehicleCrudRepository) {
         this.vehicleCrudRepository = vehicleCrudRepository;
-    }*/
+    }
 
     @Override
     public Iterable<Vehicle> listAllVehicles() {

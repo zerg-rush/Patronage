@@ -57,6 +57,7 @@ public class SpringBootstrap implements ApplicationListener<ContextRefreshedEven
 //    private Class<SwaggerDefinition> swaggerDefinitionClass;
     // swaggerDefinitionClass.
 
+    // tried to use @Qualifier annotation
 /*    @Autowired
     @Qualifier("HashMapBean")
     public void setPersonService(PersonServiceHashMap personService) {
@@ -91,19 +92,19 @@ public class SpringBootstrap implements ApplicationListener<ContextRefreshedEven
     @Conditional(StorageHashMapSelectedConfig.class)
     public void setVehicleService(VehicleServiceHashMap vehicleService) {
         this.vehicleService = vehicleService;
-    }
+    } */
 
     @Autowired
-    @Conditional(StorageH2SelectedConfig.class)
+    //@Conditional(StorageH2SelectedConfig.class)
     public void setPersonService(PersonServiceH2 personService) {
         this.personService = personService;
     }
 
     @Autowired
-    @Conditional(StorageH2SelectedConfig.class)
+    //@Conditional(StorageH2SelectedConfig.class)
     public void setVehicleService(VehicleServiceH2 vehicleService) {
         this.vehicleService = vehicleService;
-    }*/
+    }
 
 
     @Override

@@ -19,12 +19,12 @@ public class PersonServiceH2 implements PersonService {
     private PersonCrudRepository personCrudRepository;
 
     // to be used for conditional annotation for HashMap mode
-/*    @Autowired
+    @Autowired
  //   @Qualifier("H2Bean")
     @Conditional(StorageH2SelectedConfig.class)
     public void setPersonCrudRepository(PersonCrudRepository personCrudRepository) {
         this.personCrudRepository = personCrudRepository;
-    }*/
+    }
 
     @Override
     public Iterable<Person> listAllPersons() {
