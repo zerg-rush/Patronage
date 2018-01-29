@@ -1,4 +1,4 @@
-# Patronage 2018 / BACKEND / TASK #1
+# Patronage 2018 / BACKEND
 Goal: to design and implement REST API for car dealer
 ----------------------------------------------------
 
