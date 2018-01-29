@@ -16,9 +16,9 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 @RunWith(MockitoJUnitRunner.class)
-public class VehicleServiceHashMapSpyTest {
+public class VehicleServiceImplSpyTest {
     @Spy
-    private VehicleServiceHashMap vehicleServiceSpy;
+    private VehicleServiceImpl vehicleServiceSpy;
 
     @Mock
     private Vehicle vehicle;
