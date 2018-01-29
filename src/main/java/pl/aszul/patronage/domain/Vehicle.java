@@ -2,160 +2,172 @@ package pl.aszul.patronage.domain;
 
 import java.time.LocalDate;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.PastOrPresent;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.validator.constraints.Range;
-import org.hibernate.validator.*;
 import io.swagger.annotations.ApiModelProperty;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import pl.aszul.patronage.domain.enums.FuelType;
 import pl.aszul.patronage.domain.validation.ValidFirstRegistrationDate;
-import pl.aszul.patronage.domain.validation.ValidPlateNumber;
 import pl.aszul.patronage.domain.validation.ValidRegistrationCardIssueDate;
 
 /**
  This is a class for representing a vehicle
  */
-@ValidPlateNumber
 @ValidFirstRegistrationDate
 @ValidRegistrationCardIssueDate
 @Entity
-public class Vehicle {
+@XmlRootElement(name = "Vehicle")
+public class Vehicle implements ObjectId{
+
     private static Integer idGenerator = 0;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     @ApiModelProperty(notes = "The database generated vehicle ID")
     private Integer id;
 
     @Version
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     @ApiModelProperty(notes = "The auto-generated version of the vehicle")
-    private Integer version;
+    private Integer version = 1;
 
-    @ApiModelProperty(notes = "rodzaj pojazdu")
+    @ApiModelProperty(notes = "type of vehicle")
     private String vehicleType;
 
-    @ApiModelProperty(notes = "przeznaczenie pojazdu")
+    @ApiModelProperty(notes = "purpose of vehicle")
     private String vehiclePurpose;
 
-    @ApiModelProperty(notes = "rok produkcji")
+    @ApiModelProperty(notes = "manufacturing year")
     private Integer manufacturingYear;
 
-    @ApiModelProperty(notes = "dopuszczalna ladowność")
+    @ApiModelProperty(notes = "maximum load capacity")
     private String maxLoadCapacity;
 
-    @ApiModelProperty(notes = "największy dopuszczalny nacisk osi [N]")
+    @ApiModelProperty(notes = "maximum axle pressure [N]")
     private Integer maxAxlePressure;
 
-    @ApiModelProperty(notes = "numer karty pojazdu")
+    @ApiModelProperty(notes = "number of vehicle card")
     private String vehicleCardNumber;
 
-    @ApiModelProperty(notes = "seria dowodu rejestracyjnego")
+    @ApiModelProperty(notes = "series of vehicle registration card")
     private String registrationCardSeries;
 
-    @ApiModelProperty(notes = "organ wydający")
+    @ApiModelProperty(notes = "authority issuing vehicle registration card")
     private String registrationCardIssuedBy;
 
     @NotNull(message = "The plate number can not be null")
-    @Size(max = 10, message = "The plate number must be up to the 10 characters!")
-    @Pattern(regexp = "^[A-Z]{2}[0-9]{1,8}$", message = "The plate number must start with two letters and have up to eight digits!")
-    @ApiModelProperty(notes = "A — numer rejestracyjny pojazdu")
+    @Pattern(regexp = "^(?!(.).*\\1)[A-Z]{2}[0-9]{1,8}$",
+            message = "The plate number must start with two different big letters and have up to eight digits!")
+    @ApiModelProperty(notes = "A — vehicle plate number",
+            allowableValues = "The plate number must start with two different big letters and have up to eight digits!",
+            required = true)
     private String plateNumber;
 
     @NotNull(message = "The first registration date can not be null!")
     @PastOrPresent(message = "The first registration date can not be from future!")
-    @ApiModelProperty(notes = "B — data pierwszej rejestracji pojazdu")
+    @ApiModelProperty(notes = "B — vehicle first registration date",
+            allowableValues = "Have to be some date from past or at most today",
+            required = true)
     private LocalDate firstRegistrationDate;
 
-    @ApiModelProperty(notes = "C — dane dotyczące posiadacza dowodu rejestracyjnego i właściciela pojazdu obejmują wydruk następujących kodów i danych:")
-    // C.1.1 — nazwisko lub nazwa posiadacza dowodu rejestracyjnego
+    @ApiModelProperty(notes = "C.1.1 — surname or name of vehicle registration card owner")
     private String registrationCardOwnerName;
 
-    @ApiModelProperty(notes = "C.1.2 — numer PESEL lub REGON")
+    @ApiModelProperty(notes = "C.1.2 — personal identification number of vehicle registration card owner (PESEL or REGON)")
     private String registrationCardOwnerIDNumber;
 
-    @ApiModelProperty(notes = "C.1.3 — adres posiadacza dowodu rejestracyjnego")
+    @ApiModelProperty(notes = "C.1.3 — address of vehicle registration card owner")
     private String registrationCardOwnerAddress;
 
-    @ApiModelProperty(notes = "C.2.1 — nazwisko lub nazwa właściciela pojazdu")
+    @ApiModelProperty(notes = "C.2.1 — surname or name of vehicle owner")
     private String vehicleOwnerName;
 
-    @ApiModelProperty(notes = "C.2.2 — numer PESEL lub REGON")
+    @ApiModelProperty(notes = "C.2.2 — personal identification number of vehicle owner (PESEL or REGON)")
     private String vehicleOwnerIDNumber;
 
-    @ApiModelProperty(notes = "C.2.3 — adres właściciela pojazdu")
+    @ApiModelProperty(notes = "C.2.3 — address of vehicle owner")
     private String vehicleOwnerAddress;
 
     @NotNull(message = "The car brand name can not be null")
-    @Pattern(regexp="HONDA|FIAT|SKODA", flags = { Pattern.Flag.CASE_INSENSITIVE }, message = "Sorry, we buy and sell only cars manufactured by Honda, Fiat and Skoda")
-    @ApiModelProperty(notes = "D — dane dotyczące pojazdu obejmują wydruk następujących kodów i danych: \n D.1 — marka pojazdu")
+    @Pattern(regexp="HONDA|FIAT|SKODA", flags = { Pattern.Flag.CASE_INSENSITIVE },
+            message = "Sorry, we buy and sell only cars manufactured by Honda, Fiat and Skoda")
+    @ApiModelProperty(notes = "D.1 — vehicle brand name",
+            allowableValues = "Only Honda, Fiat and Skoda are allowed",
+            required = true)
     private String brandName;
 
-    @ApiModelProperty(notes = "D.2 — typ pojazdu:")
+    @ApiModelProperty(notes = "D.2 — vehicle type")
     private String modelName;
 
-    @ApiModelProperty(notes = "D.3 — model pojazdu")
+    @ApiModelProperty(notes = "D.3 — short model name of vehicle")
     private String shortModelName;
 
-    @ApiModelProperty(notes = "E — numer identyfikacyjny pojazdu (numer VIN albo numer nadwozia, podwozia lub ramy)")
+    @ApiModelProperty(notes = "E — Vehicle Identification Number (or frame)")
     private String vINNumber;
 
-    @ApiModelProperty(notes = "F.1 — maksymalna masa całkowita pojazdu[b], wyłączając motocykle i motorowery [kg]")
+    @ApiModelProperty(notes = "F.1 — maximum weight of vehicle (excluding motorcycles and motorbikes ) [kg]")
     private Integer maxWeight;
 
-    @ApiModelProperty(notes = "F.2 — dopuszczalna masa całkowita pojazdu [kg]")
+    @ApiModelProperty(notes = "F.2 — acceptable total weight of vehicle [kg]")
     private Integer acceptableWeight;
 
-    @ApiModelProperty(notes = "F.3 — dopuszczalna masa całkowita zespołu pojazdów [kg]")
+    @ApiModelProperty(notes = "F.3 — acceptable total weight of vehicle group [kg]")
     private Integer acceptableGroupWeight;
 
-    @ApiModelProperty(notes = "G — masa własna pojazdu\n w przypadku pojazdu ciągnącego innego niż kategoria M1 masa własna pojazdu obejmuje urządzenie sprzęgające [kg]")
+    @ApiModelProperty(notes = "G — vehicle own weight [kg]")
     private Integer weight;
 
-    @ApiModelProperty(notes = "H — okres ważności dowodu, jeżeli występuje takie ograniczenie")
+    @ApiModelProperty(notes = "H — vehicle registration card expiry date (if applicable)")
     private LocalDate registrationCardExpiryDate;
 
     @NotNull(message = "The registration card issue date can not be null")
     @PastOrPresent(message = "The registration card issue date can not be from future")
-    @ApiModelProperty(notes = "I — data wydania dowodu rejestracyjnego")
+    @ApiModelProperty(notes = "I — vehicle registration card issue date",
+            allowableValues = "The registration card issue date must some date from past or at most today!",
+            required = true)
     private LocalDate registrationCardIssueDate;
 
-    @ApiModelProperty(notes = "J — kategoria pojazdu")
+    @ApiModelProperty(notes = "J — vehicle category")
     private String vehicleCategory;
 
-    @ApiModelProperty(notes = "K — numer świadectwa homologacji typu pojazdu, jeżeli występuje")
+    @ApiModelProperty(notes = "K — vehicle homologation number (if applicable)")
     private String homologationNumber;
 
-    @ApiModelProperty(notes = "L — liczba osi")
+    @ApiModelProperty(notes = "L — number of vehicle axles")
     private Integer axleNumber;
 
-    @ApiModelProperty(notes = "O.1 — maksymalna masa całkowita przyczepy z hamulcem [kg]")
+    @ApiModelProperty(notes = "O.1 — maximum total weight with trailer with brakes [kg]")
     private String maxWeightWTrailerWBreaks;
 
-    @ApiModelProperty(notes = "O.2 — maksymalna masa całkowita przyczepy bez hamulca [kg]")
+    @ApiModelProperty(notes = "O.2 — maximum total weight with trailer without brakes [kg]")
     private String maxWeightWTrailerWOBreaks;
 
     @NotNull(message = "The engine capacity can not be null")
-    @Range(min = 50, max = 6999, message = "The engine capacity must be bigger than ${min} and less than ${max} [cm3]")
-    @ApiModelProperty(notes = "P.1 — pojemność silnika [cm3]")
+    @Range(min = 50, max = 6999, message = "The engine capacity must be bigger than {min} and less than {max} [cm3]")
+    @ApiModelProperty(notes = "P.1 — vehicle engine capacity [cm3]",
+            allowableValues = "Engine capacity must be The registration card issue date must some date from past or at most today!",
+            required = true)
     private Integer engineCapacity;
 
-    @ApiModelProperty(notes = "P.2 — maksymalna moc netto silnika [W]")
+    @ApiModelProperty(notes = "P.2 — maximum engine power [W]")
     private Integer enginePower;
 
-    @ApiModelProperty(notes = "P.3 — rodzaj paliwa")
+    @ApiModelProperty(notes = "P.3 — fuel type")
     private FuelType fuelType;
 
-    @ApiModelProperty(notes = "Q — stosunek mocy do masy własnej (dotyczy motocykli i motorowerów) [kW/kg]")
+    @ApiModelProperty(notes = "Q — vehicle power to weight ratio (excluding motorcycles and motorbikes) [kW/kg]")
     private String powerToWeightRatio;
 
-    @Range(min = 1, max = 6, message = "Car must have more than ${min} and less than ${max} seats!")
-    @ApiModelProperty(notes = "S.1 — liczba miejsc siedzących, włączając siedzenie kierowcy")
+    @Range(min = 1, max = 6, message = "Car must have at least {min} and at most {max} seats!")
+    @ApiModelProperty(notes = "S.1 — vehicle number of seats (including drivers seat )")
     private Integer seats;
 
-    @ApiModelProperty(notes = "S.2 — liczba miejsc stojących, jeżeli występuje")
+    @ApiModelProperty(notes = "S.2 — vehicle number of standing places (if applicable )")
     private Integer standingPlaces;
 
     public Vehicle(){
@@ -232,6 +244,7 @@ public class Vehicle {
                 "---", 4, 0);
     }
 
+    @Override
     public Integer getId() {
         return id;
     }
@@ -312,6 +325,7 @@ public class Vehicle {
         this.registrationCardIssuedBy = registrationCardIssuedBy;
     }
 
+    @XmlElement(name = "plateNumber")
     public String getPlateNumber() {
         return plateNumber;
     }

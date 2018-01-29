@@ -4,7 +4,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
-import springfox.documentation.service.Contact;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
@@ -20,15 +19,16 @@ public class SwaggerConfig {
                 .apis(RequestHandlerSelectors.basePackage("pl.aszul.patronage"))
                 .paths(regex("/.*"))
                 .build()
-                .apiInfo(metaData());
+                .apiInfo(metaData())
+                .useDefaultResponseMessages(false);
     }
     private ApiInfo metaData() {
         ApiInfo apiInfo = new ApiInfo(
-                "intive Patronage 2018 Backend (REST API)",
-                "Goal: To design and implement REST API for car dealer",
-                "2.0",
+                "intive Patronage 2018 Backend (REST API for car dealer)",
+                "Goal: To design and implement REST API for car dealer.",
+                "3.0.0",
                 "Terms of service",
-                new Contact("Zerg Rush", "https://github.com/zerg-rush/Patronage1", "zerg-rush@dev.null"),
+                "Zerg Rush",
                "Apache License Version 2.0",
                 "https://www.apache.org/licenses/LICENSE-2.0");
         return apiInfo;

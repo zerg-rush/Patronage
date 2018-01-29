@@ -1,21 +1,18 @@
 package pl.aszul.patronage.services;
 
-import pl.aszul.patronage.domain.Person;
-
 import org.junit.Before;
 import org.junit.Test;
-
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-
 import static org.mockito.Mockito.*;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
+import pl.aszul.patronage.domain.Person;
 
 public class PersonServiceImplMockTest {
 
-    private PersonServiceHashMap personService;
+    private PersonServiceImpl personService;
 
     @Mock
     private Person person;
@@ -23,7 +20,7 @@ public class PersonServiceImplMockTest {
     @Before
     public void setupMock() {
         MockitoAnnotations.initMocks(this);
-        personService = new PersonServiceHashMap();
+        personService = new PersonServiceImpl();
     }
 
     @Test

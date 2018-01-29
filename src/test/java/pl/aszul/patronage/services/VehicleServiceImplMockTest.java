@@ -13,9 +13,9 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class VehicleServiceHashMapMockTest {
+public class VehicleServiceImplMockTest {
 
-    private VehicleServiceHashMap vehicleService;
+    private VehicleServiceImpl vehicleService;
 
     @Mock
     private Vehicle vehicle;
@@ -23,7 +23,7 @@ public class VehicleServiceHashMapMockTest {
     @Before
     public void setupMock() {
         MockitoAnnotations.initMocks(this);
-        vehicleService = new VehicleServiceHashMap();
+        vehicleService = new VehicleServiceImpl();
     }
 
     @Test

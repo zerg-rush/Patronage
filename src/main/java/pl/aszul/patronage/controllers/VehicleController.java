@@ -1,71 +1,87 @@
 package pl.aszul.patronage.controllers;
 
-import pl.aszul.patronage.domain.Vehicle;
-import pl.aszul.patronage.services.VehicleService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
+import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
+import pl.aszul.patronage.domain.Vehicle;
+import pl.aszul.patronage.services.VehicleService;
+import java.util.Collections;
+import java.util.Map;
 
 @RestController
-@RequestMapping("/vehicles")
-@Api(value = "onlinestore", description="Controller exposing Vehicle class objects")
+@RequestMapping(value = "/vehicles", produces = {"application/json", "application/xml"})
+@Api(value = "onlinestore", description = "Controller exposing Vehicle class objects", tags = "VehicleController")
 public class VehicleController {
 
+    @Autowired
     private VehicleService vehicleService;
 
-    @Autowired
-    public VehicleController(VehicleService vehicleService) {
-        this.vehicleService = vehicleService;
-    }
-
-    @ApiOperation(value = "View a list of available vehicles", response = Iterable.class)
-    @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Successfully retrieved resource"),
-            @ApiResponse(code = 201, message = "Successfully created resource"),
-            @ApiResponse(code = 401, message = "Authorization failed"),
-            @ApiResponse(code = 403, message = "Access to the resource is forbidden"),
-            @ApiResponse(code = 404, message = "The resource is not found")
-    }
-    )
-    @RequestMapping(value = "/list", method = RequestMethod.GET, produces = "application/json")
-    public Iterable<Vehicle> list(Model model){
+    @ApiOperation(value = "View a list of available vehicles",
+            response = Vehicle.class,
+            responseContainer = "Iterable")
+    @ApiResponse(code = 200, message = "Successfully retrieved all vehicles")
+    @GetMapping(value = "/list", produces = {"application/json", "application/xml"})
+    public Iterable<Vehicle> list(Model model) {
         Iterable<Vehicle> vehicleList = vehicleService.list();
         return vehicleList;
     }
 
-    @ApiOperation(value = "Show a vehicle",response = Vehicle.class)
-    @RequestMapping(value = "/show/{id}", method = RequestMethod.GET, produces = "application/json")
-    public ResponseEntity showVehicle(@PathVariable Integer id, Model model){
-        // ResponseEntity<Vehicle> response = null;
+    @ApiOperation(value = "View a number of available vehicles", response = Map.class)
+    @ApiResponse(code = 200, message = "Successfully retrieved resource")
+    @GetMapping(value = "/count", produces = {"application/json", "application/xml"})
+    public ResponseEntity count(Model model){
+        return new ResponseEntity(Collections.singletonMap("vehicles", vehicleService.count()), HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "Show a vehicle with an Id", response = Vehicle.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "OK"),
+            @ApiResponse(code = 404, message = "Requested vehicle not found")
+    }
+    )
+    @GetMapping(value = "/show/{id}", produces = {"application/json", "application/xml"})
+    public ResponseEntity showVehicle(
+            @ApiParam(value = "Id number of requested vehicle", required = true) @PathVariable Integer id, Model model) {
         ResponseEntity<Vehicle> response;
 
         Vehicle storedVehicle = vehicleService.read(id);
         if (storedVehicle != null) {
             response = new ResponseEntity(storedVehicle, HttpStatus.OK);
         } else {
-            response = new ResponseEntity("Vehicle not found", HttpStatus.NOT_FOUND);
+            response = new ResponseEntity("Requested Vehicle not found", HttpStatus.NOT_FOUND);
         }
         return response;
     }
 
     @ApiOperation(value = "Add a vehicle")
-    @RequestMapping(value = "/add", method = RequestMethod.POST, produces = "application/json")
-    public ResponseEntity saveVehicle(@Valid @RequestBody Vehicle vehicle){
+    @ApiResponses(value = {
+            @ApiResponse(code = 201, message = "Vehicle added successfully"),
+            @ApiResponse(code = 400, message = "Incorrect Vehicle data"),
+    }
+    )
+    @PostMapping(value = "/add", produces = {"application/json", "application/xml"})
+    public ResponseEntity addVehicle(
+            @ApiParam(value = "Vehicle that needs to be added", required = true)
+            @Valid @RequestBody Vehicle vehicle) {
         vehicleService.create(vehicle);
-        return new ResponseEntity("Vehicle saved successfully", HttpStatus.OK);
+        return new ResponseEntity("Vehicle added successfully", HttpStatus.CREATED);
     }
 
-    @ApiOperation(value = "Update a vehicle")
-    @RequestMapping(value = "/update/{id}", method = RequestMethod.PUT, produces = "application/json")
-    public ResponseEntity<?> updateVehicle(@PathVariable Integer id, @Valid @RequestBody Vehicle vehicle){
-        // ResponseEntity<?> response = null;
+    @ApiOperation(value = "Update a vehicle with an Id")
+    @ApiResponses(value = {
+            @ApiResponse(code = 202, message = "Vehicle updated successfully"),
+            @ApiResponse(code = 400, message = "Incorrect Vehicle data"),
+            @ApiResponse(code = 404, message = "Requested Vehicle not found")
+    }
+    )
+    @PutMapping(value = "/update/{id}", produces = {"application/json", "application/xml"})
+    public ResponseEntity<?> updateVehicle(
+            @ApiParam(value = "Vehicle number that needs to be updated", required = true) @PathVariable Integer id,
+            @ApiParam(value = "Updated Vehicle details", required = true) @Valid @RequestBody Vehicle vehicle) {
         ResponseEntity<?> response;
 
         Vehicle storedVehicle = vehicleService.read(id);
@@ -108,16 +124,21 @@ public class VehicleController {
             storedVehicle.setSeats(vehicle.getSeats());
             storedVehicle.setStandingPlaces(vehicle.getStandingPlaces());
             vehicleService.create(storedVehicle);
-            response = new ResponseEntity<>("Vehicle updated successfully", HttpStatus.OK);
+            response = new ResponseEntity<>("Vehicle updated successfully", HttpStatus.ACCEPTED);
         } else {
-            response = new ResponseEntity<>("Vehicle not found", HttpStatus.NOT_FOUND);
+            response = new ResponseEntity<>("Requested Vehicle not found", HttpStatus.NOT_FOUND);
         }
         return response;
     }
 
-    @ApiOperation(value = "Delete a vehicle")
-    @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE, produces = "application/json")
-    public ResponseEntity<?> deleteVehicle(@PathVariable Integer id){
+    @ApiOperation(value = "Delete a vehicle with an Id")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Vehicle deleted successfully"),
+            @ApiResponse(code = 404, message = "Requested Vehicle not found")
+    }
+    )
+    @DeleteMapping(value = "/delete/{id}", produces = {"application/json", "application/xml"})
+    public ResponseEntity<?> deleteVehicle(@PathVariable Integer id) {
         ResponseEntity<?> response;
 
         Vehicle storedVehicle = vehicleService.read(id);
@@ -125,7 +146,7 @@ public class VehicleController {
             vehicleService.delete(id);
             response = new ResponseEntity<>("Vehicle deleted successfully", HttpStatus.OK);
         } else {
-            response = new ResponseEntity<>("Vehicle not found", HttpStatus.NOT_FOUND);
+            response = new ResponseEntity<>("Requested Vehicle not found", HttpStatus.NOT_FOUND);
         }
         return response;
     }
