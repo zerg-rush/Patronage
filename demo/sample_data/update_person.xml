@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Person>
+	<name>Updated Mrs. King</name>
+	<surname>Kong Xml</surname>
+	<gender>FEMALE</gender>
+	<birthDate>1985-11-12</birthDate>
+	<email>testowy@onet.pl</email>
+	<personalIDNumber>987654321</personalIDNumber>
+	<personalIDNumberType>PESEL</personalIDNumberType>
+	<tel>48700700700</tel>
+</Person>

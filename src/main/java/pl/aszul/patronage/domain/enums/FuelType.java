@@ -3,9 +3,12 @@ package pl.aszul.patronage.domain.enums;
 public enum FuelType {
     DIESEL ("D"),
     GASOLINE ("G"),
-    ELECTRIC ("E"),
+    LPG ("LPG"),
+    LNG ("LNG"),
     HYBRID ("HB"),
-    HYDROGEN ("HG");
+    ELECTRIC ("E"),
+    HYDROGEN ("HG"),
+    OTHER ("O");
 
     final String engineTypeShort;
 

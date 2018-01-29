@@ -1,52 +1,59 @@
 package pl.aszul.patronage.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModelProperty;
-import org.hibernate.validator.constraints.Email;
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.xml.bind.annotation.XmlRootElement;
+import java.time.LocalDate;
 import pl.aszul.patronage.domain.enums.Gender;
 import pl.aszul.patronage.domain.enums.IDNumberType;
 
-import java.time.LocalDate;
-
 /**
- This is a class for representing a person
+ This is a class for representing a Person
  */
 @Entity
-public class Person {
+@XmlRootElement
+public class Person implements ObjectId{
+
     private static Integer idGenerator = 0;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @ApiModelProperty(notes = "The database generated product ID")
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    @ApiModelProperty(notes = "The automatically generated person ID (to be used for all requests)")
     private Integer id;
 
     @Version
-    @ApiModelProperty(notes = "The auto-generated version of the person")
-    private Integer version;
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    @ApiModelProperty(notes = "The auto-generated version of the person record (stores number of updates)")
+    private Integer version = 1;
 
-    @ApiModelProperty(notes = "surename of person")
-    private String surname;
-
-    @ApiModelProperty(notes = "name of person")
+    @ApiModelProperty(notes = "Name of person", position = 1)
     private String name;
 
-    @ApiModelProperty(notes = "gender identification")
+    @ApiModelProperty(notes = "Surname of person", position = 2)
+    private String surname;
+
+    @ApiModelProperty(notes = "Gender identification of person", position = 3)
     private Gender gender;
 
-    @ApiModelProperty(notes = "birth date")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    @ApiModelProperty(notes = "Birth date of person", required = true)
     private LocalDate birthDate;
 
-    @ApiModelProperty(notes = "personal identification number value (PESEL, NIP, REGON, ID card number, passport number etc.)")
+    @ApiModelProperty(notes = "Personal identification number value (PESEL, NIP, REGON, ID card number, passport number etc.)")
     private String personalIDNumber;
 
-    @ApiModelProperty(notes = "personal identification number type (PESEL, NIP, REGON, ID card number, passport number etc.)")
+    @ApiModelProperty(notes = "Personal identification number type (PESEL, NIP, REGON, ID card number, passport number etc.)")
     private IDNumberType personalIDNumberType;
 
-    @ApiModelProperty(notes = "telephone number")
+    @ApiModelProperty(notes = "Telephone number of person")
     private Long tel;
 
     @Email
-    @ApiModelProperty(notes = "e-mail address")
+    @ApiModelProperty(notes = "E-mail address of person")
     private String email;
 
     public Person(){
@@ -65,6 +72,7 @@ public class Person {
         this.email = email;
     }
 
+    @Override
     public Integer getId() {
         return id;
     }

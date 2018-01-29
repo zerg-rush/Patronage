@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Vehicle>
+	<plateNumber>XM12345678</plateNumber>
+	<brandName>HONDA</brandName>
+	<shortModelName>Legend XML</shortModelName>
+	<manufacturingYear>2018</manufacturingYear>
+	<fuelType>ELECTRIC</fuelType>
+	<engineCapacity>2000</engineCapacity>
+	<enginePower>240000</enginePower>
+	<firstRegistrationDate>2018-01-02</firstRegistrationDate>
+	<registrationCardIssueDate>2018-01-03</registrationCardIssueDate>
+	<seats>5</seats>
+	<vinnumber>1FTFW1ET9EKE14620</vinnumber>
+</Vehicle>

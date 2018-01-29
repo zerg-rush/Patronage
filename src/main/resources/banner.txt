@@ -1,0 +1,7 @@
+  .   ____          _            __ _ _    ${AnsiColor.BRIGHT_BLUE}    ______                                                           ${AnsiStyle.NORMAL}
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \   ${AnsiColor.BRIGHT_BLUE}   (_____ \         _                                                ${AnsiStyle.NORMAL}
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \  ${AnsiColor.BRIGHT_BLUE}    _____) )  ____ | |_    ____   ___   ____    ____   ____   ____   ${AnsiStyle.NORMAL}
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) ) ${AnsiColor.BRIGHT_BLUE}   |  ____/  / _  ||  _)  / ___) / _ \ |  _ \  / _  | / _  | / _  )  ${AnsiStyle.NORMAL}
+  '  |____| .__|_| |_|_| |_\__, | / / / /  ${AnsiColor.BRIGHT_BLUE}   | |      ( ( | || |__ | |    | |_| || | | |( ( | |( ( | |( (/ /   ${AnsiStyle.NORMAL}
+ =========|_|==============|___/=/_/_/_/   ${AnsiColor.BRIGHT_BLUE}   |_|       \_||_| \___)|_|     \___/ |_| |_| \_||_| \_|| | \____)  ${AnsiStyle.NORMAL}
+                                           ${AnsiColor.BRIGHT_BLUE}                                                     (_____|         ${AnsiStyle.NORMAL}

@@ -18,7 +18,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 @RunWith(MockitoJUnitRunner.class)
 public class PersonServiceImplSpyTest {
     @Spy
-    private PersonServiceHashMap personServiceSpy;
+    private PersonServiceImpl personServiceSpy;
 
     @Mock
     private Person person;

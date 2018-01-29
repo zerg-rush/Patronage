@@ -1,0 +1,13 @@
+{
+  "plateNumber": "UP12345678",
+  "brandName": "HONDA",
+  "shortModelName": "Updated Legend JSON (wrong engine capacity)",
+  "manufacturingYear": 2018,  
+  "fuelType": "ELECTRIC",
+  "engineCapacity": 7999,
+  "enginePower": 240000,
+  "firstRegistrationDate": "2018-01-02",
+  "registrationCardIssueDate": "2018-01-03",
+  "seats": 5,
+  "vinnumber": "1FTFW1ET9EKE14620"
+}

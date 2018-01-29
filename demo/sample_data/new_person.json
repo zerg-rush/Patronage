@@ -1,0 +1,10 @@
+{
+  "name": "King",
+  "surname": "Kong Json",
+  "gender": "MALE",
+  "birthDate": "1985-11-12",
+  "email": "testowy@onet.pl",
+  "personalIDNumber": "987654321",
+  "personalIDNumberType": "PESEL",
+  "tel": 48700700700
+}
