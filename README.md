@@ -48,8 +48,7 @@ Extra storage endpoint (to check which storage mode is chosen):
 
 ![](images/swagger11.png)
 
-HAL browser (additional embedded browser included in the project, which provide basic UI for accessing REST API, https://github.com/mikekelly/hal-browser):
-
+HAL browser (additional embedded browser included in the project, which provide basic UI for accessing REST API, https://github.com/mikekelly/hal-browser):  
 [http://localhost:8080/browser/index.html#/](http://localhost:8080/browser/index.html#/)
 ![](images/HAL_browser1.png)
  
@@ -57,22 +56,27 @@ HAL browser (additional embedded browser included in the project, which provide 
 ![](images/HAL_browser2.png)
 
 IntelliJ REST API assistant tool:  
+
 ![](images/IntelliJ%20Menu%20-%20Test%20REST%20API%20plugin.png)
 
 ![](images/IntelliJ%20Test%20REST%20API%20plugin.png)
 
 Swagger2 UI presenting specific HTTP codes fine tuned for each method/endpoint
 ---------------------------
-add Person method (POST /persons/add, HTTP codes: 201, 400):
+add Person method (POST /persons/add, HTTP codes: 201, 400):  
+
 ![](images/HTTP_codes_1.png)
 
-delete Person method (DELETE /persons/delete/{id}, HTTP codes: 404):
+delete Person method (DELETE /persons/delete/{id}, HTTP codes: 404):  
+
 ![](images/HTTP_codes_3.png)
 
-show Person method (GET /persons/show/{id}, HTTP codes: 404):
+show Person method (GET /persons/show/{id}, HTTP codes: 404):  
+
 ![](images/HTTP_codes_5.png)
 
-update Person method (PUT /persons/update/{id}, HTTP codes: 202, 400, 404):
+update Person method (PUT /persons/update/{id}, HTTP codes: 202, 400, 404):  
+
 ![](images/HTTP_codes_6.png)
  
 
@@ -97,53 +101,3 @@ Demo of validating vehicle plate number
 Demo of validating engine capacity, vehicle brand and number of seats
 ---------------------------------------
 ![](images/validation_demo_engine_brand_seats.png)
-
-
-1) Simplest one with interner browser
-
-[img] Browser.png
-
-2) curl utility
-
-
-[img] Windows command box with curl.png
-
-
-
-[img] BASH command box with curl.png
-
-
-[code box] testing class
-
-[img] jakiś obrazek ilustrujący
-
-
-
-
-All endpoints summary exposed by service
-http://localhost:8080/v2/api-docs  
-http://localhost:8080/swagger-resources/configuration/security  
-http://localhost:8080/swagger-resources/configuration/ui  
-http://localhost:8080/swagger-resources  
-http://localhost:8080/error  
-http://localhost:8080/metrics/{name:.*}  
-http://localhost:8080/metrics || /metrics.json  
-http://localhost:8080/heapdump || /heapdump.json  
-http://localhost:8080/loggers/{name:.*}  
-http://localhost:8080/loggers/{name:.*}  
-http://localhost:8080/loggers || /loggers.json  
-http://localhost:8080/autoconfig || /autoconfig.json  
-http://localhost:8080/actuator || /actuator.json  
-http://localhost:8080/trace || /trace.json  
-http://localhost:8080/auditevents || /auditevents.json  
-http://localhost:8080/configprops || /configprops.json  
-http://localhost:8080/health || /health.json  
-http://localhost:8080/dump || /dump.json  
-http://localhost:8080/env/{name:.*}  
-http://localhost:8080/env || /env.json  
-http://localhost:8080/mappings || /mappings.json  
-http://localhost:8080/beans || /beans.json  
-http://localhost:8080/info || /info.json  
-http://localhost:8080/webjars/**  
-http://localhost:8080/**  
-http://localhost:8080/**/favicon.ico  
