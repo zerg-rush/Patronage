@@ -62,23 +62,23 @@ IntelliJ REST API assistant tool:
 ![](images/IntelliJ%20Test%20REST%20API%20plugin.png)
 
 
-Swagger2 UI presenting specific HTTP codes fine tuned for each method/endpoint:  
+Swagger2 UI presenting specific HTTP codes fine tuned for each method/endpoint  
 ---------------------------
 
 add Person method (POST /persons/add, HTTP codes: 201, 400):  
-
+---------------------------------------------
 ![](images/HTTP_codes_1.png)
   
 delete Person method (DELETE /persons/delete/{id}, HTTP codes: 404):  
-  
+-----------------------------------------
 ![](images/HTTP_codes_3.png)
   
 show Person method (GET /persons/show/{id}, HTTP codes: 404):  
-  
+-----------------------------------
 ![](images/HTTP_codes_5.png)
   
 update Person method (PUT /persons/update/{id}, HTTP codes: 202, 400, 404):  
-  
+------------------------------------------  
 ![](images/HTTP_codes_6.png)
  
 
@@ -96,10 +96,10 @@ Environment variable H2_STORAGE_ENABLED set to false in IntelliJ IDE (for tests)
 ![](images/environment%20setting%20for%20H2%20in%20IntelliJ.png)
 
 
-Demo of validating vehicle plate number
+Demo of validating vehicle plate number:
 ---------------------------------------
 ![](images/validation_demo_wrong_plate_number.png)
 
-Demo of validating engine capacity, vehicle brand and number of seats
+Demo of validating engine capacity, vehicle brand and number of seats:
 ---------------------------------------
 ![](images/validation_demo_engine_brand_seats.png)
