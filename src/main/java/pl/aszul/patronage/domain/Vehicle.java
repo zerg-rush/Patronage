@@ -28,146 +28,201 @@ public class Vehicle implements ObjectId{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    @ApiModelProperty(notes = "The database generated vehicle ID")
+    @ApiModelProperty(notes = "The database generated vehicle ID", position = 1)
     private Integer id;
 
     @Version
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    @ApiModelProperty(notes = "The auto-generated version of the vehicle")
+    @ApiModelProperty(notes = "The auto-generated version of the vehicle", position = 2)
     private Integer version = 1;
 
-    @ApiModelProperty(notes = "type of vehicle")
+    @ApiModelProperty(notes = "type of vehicle",
+            example = "SAMOCHÓD OSOBOWY",
+            position = 3)
     private String vehicleType;
 
-    @ApiModelProperty(notes = "purpose of vehicle")
+    @ApiModelProperty(notes = "purpose of vehicle",
+            example = "---",
+            position = 4)
     private String vehiclePurpose;
 
-    @ApiModelProperty(notes = "manufacturing year")
+    @ApiModelProperty(notes = "manufacturing year",
+            example = "2018",
+            position = 5)
     private Integer manufacturingYear;
 
-    @ApiModelProperty(notes = "maximum load capacity")
+    @ApiModelProperty(notes = "maximum load capacity",
+            example = "---",
+            position = 6)
     private String maxLoadCapacity;
 
-    @ApiModelProperty(notes = "maximum axle pressure [N]")
+    @ApiModelProperty(notes = "maximum axle pressure [N]",
+            example = "8882",
+            position = 7)
     private Integer maxAxlePressure;
 
-    @ApiModelProperty(notes = "number of vehicle card")
+    @ApiModelProperty(notes = "number of vehicle card",
+            example = "AAA0000000",
+            position = 8)
     private String vehicleCardNumber;
 
-    @ApiModelProperty(notes = "series of vehicle registration card")
+    @ApiModelProperty(notes = "series of vehicle registration card",
+            example = "DR/AAA0007046",
+            position = 9)
     private String registrationCardSeries;
 
-    @ApiModelProperty(notes = "authority issuing vehicle registration card")
+    @ApiModelProperty(notes = "authority issuing vehicle registration card",
+            example = "PREZYDENT",
+            position = 10)
     private String registrationCardIssuedBy;
 
     @NotNull(message = "The plate number can not be null")
     @Pattern(regexp = "^(?!(.).*\\1)[A-Z]{2}[0-9]{1,8}$",
             message = "The plate number must start with two different big letters and have up to eight digits!")
     @ApiModelProperty(notes = "A — vehicle plate number",
-            allowableValues = "The plate number must start with two different big letters and have up to eight digits!",
-            required = true)
+            allowableValues = "must start with two different big letters and have up to eight digits!",
+            required = true,
+            example = "ZS12345678",
+            position = 11)
     private String plateNumber;
 
     @NotNull(message = "The first registration date can not be null!")
     @PastOrPresent(message = "The first registration date can not be from future!")
     @ApiModelProperty(notes = "B — vehicle first registration date",
-            allowableValues = "Have to be some date from past or at most today",
-            required = true)
+            allowableValues = "from past, till today",
+            required = true,
+            example = "2015-12-31",
+            position = 12)
     private LocalDate firstRegistrationDate;
 
-    @ApiModelProperty(notes = "C.1.1 — surname or name of vehicle registration card owner")
+    @ApiModelProperty(notes = "C.1.1 — surname or name of vehicle registration card owner",
+            example = "KOWALSKI JAN",
+            position = 13)
     private String registrationCardOwnerName;
 
-    @ApiModelProperty(notes = "C.1.2 — personal identification number of vehicle registration card owner (PESEL or REGON)")
+    @ApiModelProperty(notes = "C.1.2 — personal identification number of vehicle registration card owner (PESEL or REGON)",
+            position = 14)
     private String registrationCardOwnerIDNumber;
 
-    @ApiModelProperty(notes = "C.1.3 — address of vehicle registration card owner")
+    @ApiModelProperty(notes = "C.1.3 — address of vehicle registration card owner",
+            position = 15)
     private String registrationCardOwnerAddress;
 
-    @ApiModelProperty(notes = "C.2.1 — surname or name of vehicle owner")
+    @ApiModelProperty(notes = "C.2.1 — surname or name of vehicle owner",
+            example = "KOWALSKA MARIA",
+            position = 16)
     private String vehicleOwnerName;
 
-    @ApiModelProperty(notes = "C.2.2 — personal identification number of vehicle owner (PESEL or REGON)")
+    @ApiModelProperty(notes = "C.2.2 — personal identification number of vehicle owner (PESEL or REGON)",
+            position = 17)
     private String vehicleOwnerIDNumber;
 
-    @ApiModelProperty(notes = "C.2.3 — address of vehicle owner")
+    @ApiModelProperty(notes = "C.2.3 — address of vehicle owner",
+            position = 18)
     private String vehicleOwnerAddress;
 
     @NotNull(message = "The car brand name can not be null")
     @Pattern(regexp="HONDA|FIAT|SKODA", flags = { Pattern.Flag.CASE_INSENSITIVE },
             message = "Sorry, we buy and sell only cars manufactured by Honda, Fiat and Skoda")
     @ApiModelProperty(notes = "D.1 — vehicle brand name",
-            allowableValues = "Only Honda, Fiat and Skoda are allowed",
-            required = true)
+            allowableValues = "Honda, Fiat, Skoda",
+            required = true,
+            position = 19)
     private String brandName;
 
-    @ApiModelProperty(notes = "D.2 — vehicle type")
+    @ApiModelProperty(notes = "D.2 — full model name of vehicle",
+            position = 20)
     private String modelName;
 
-    @ApiModelProperty(notes = "D.3 — short model name of vehicle")
+    @ApiModelProperty(notes = "D.3 — short model name of vehicle",
+            position = 21)
     private String shortModelName;
 
-    @ApiModelProperty(notes = "E — Vehicle Identification Number (or frame)")
+    @ApiModelProperty(notes = "E — Vehicle Identification Number",
+            example = "1B7HF13YXYJ105403",
+            position = 22)
     private String vINNumber;
 
-    @ApiModelProperty(notes = "F.1 — maximum weight of vehicle (excluding motorcycles and motorbikes ) [kg]")
+    @ApiModelProperty(notes = "F.1 — maximum weight of vehicle (excluding motorcycles and motorbikes ) [kg]",
+            position = 23)
     private Integer maxWeight;
 
-    @ApiModelProperty(notes = "F.2 — acceptable total weight of vehicle [kg]")
+    @ApiModelProperty(notes = "F.2 — acceptable total weight of vehicle [kg]",
+            position = 24)
     private Integer acceptableWeight;
 
-    @ApiModelProperty(notes = "F.3 — acceptable total weight of vehicle group [kg]")
+    @ApiModelProperty(notes = "F.3 — acceptable total weight of vehicle group [kg]",
+            position = 25)
     private Integer acceptableGroupWeight;
 
-    @ApiModelProperty(notes = "G — vehicle own weight [kg]")
+    @ApiModelProperty(notes = "G — vehicle own weight [kg]",
+            position = 26)
     private Integer weight;
 
-    @ApiModelProperty(notes = "H — vehicle registration card expiry date (if applicable)")
+    @ApiModelProperty(notes = "H — vehicle registration card expiry date (if applicable)",
+            example = "2020-12-31",
+            position = 27)
     private LocalDate registrationCardExpiryDate;
 
     @NotNull(message = "The registration card issue date can not be null")
     @PastOrPresent(message = "The registration card issue date can not be from future")
     @ApiModelProperty(notes = "I — vehicle registration card issue date",
             allowableValues = "The registration card issue date must some date from past or at most today!",
-            required = true)
+            required = true,
+            example = "2000-12-31",
+            position = 28)
     private LocalDate registrationCardIssueDate;
 
-    @ApiModelProperty(notes = "J — vehicle category")
+    @ApiModelProperty(notes = "J — vehicle category",
+            position = 29)
     private String vehicleCategory;
 
-    @ApiModelProperty(notes = "K — vehicle homologation number (if applicable)")
+    @ApiModelProperty(notes = "K — vehicle homologation number (if applicable)",
+            position = 30)
     private String homologationNumber;
 
-    @ApiModelProperty(notes = "L — number of vehicle axles")
+    @ApiModelProperty(notes = "L — number of vehicle axles",
+            position = 31)
     private Integer axleNumber;
 
-    @ApiModelProperty(notes = "O.1 — maximum total weight with trailer with brakes [kg]")
+    @ApiModelProperty(notes = "O.1 — maximum total weight with trailer with brakes [kg]",
+            position = 32)
     private String maxWeightWTrailerWBreaks;
 
-    @ApiModelProperty(notes = "O.2 — maximum total weight with trailer without brakes [kg]")
+    @ApiModelProperty(notes = "O.2 — maximum total weight with trailer without brakes [kg]",
+            position = 33)
     private String maxWeightWTrailerWOBreaks;
 
     @NotNull(message = "The engine capacity can not be null")
     @Range(min = 50, max = 6999, message = "The engine capacity must be bigger than {min} and less than {max} [cm3]")
     @ApiModelProperty(notes = "P.1 — vehicle engine capacity [cm3]",
-            allowableValues = "Engine capacity must be The registration card issue date must some date from past or at most today!",
-            required = true)
+            allowableValues = "range[50, 6999]",
+            required = true,
+            position = 34)
     private Integer engineCapacity;
 
-    @ApiModelProperty(notes = "P.2 — maximum engine power [W]")
+    @ApiModelProperty(notes = "P.2 — maximum engine power [W]",
+            example = "200000",
+            position = 35)
     private Integer enginePower;
 
-    @ApiModelProperty(notes = "P.3 — fuel type")
+    @ApiModelProperty(notes = "P.3 — fuel type",
+            example = "DIESEL",
+            position = 36)
     private FuelType fuelType;
 
-    @ApiModelProperty(notes = "Q — vehicle power to weight ratio (excluding motorcycles and motorbikes) [kW/kg]")
+    @ApiModelProperty(notes = "Q — vehicle power to weight ratio (excluding motorcycles and motorbikes) [kW/kg]",
+            position = 37)
     private String powerToWeightRatio;
 
-    @Range(min = 1, max = 6, message = "Car must have at least {min} and at most {max} seats!")
-    @ApiModelProperty(notes = "S.1 — vehicle number of seats (including drivers seat )")
+    @Range(min = 1, max = 6, message = "Vehicle must have at least {min} and at most {max} seats!")
+    @ApiModelProperty(notes = "S.1 — vehicle number of seats (including drivers seat )",
+            allowableValues = "range[1, 6]",
+            position = 38)
     private Integer seats;
 
-    @ApiModelProperty(notes = "S.2 — vehicle number of standing places (if applicable )")
+    @ApiModelProperty(notes = "S.2 — vehicle number of standing places (if applicable )",
+            position = 39)
     private Integer standingPlaces;
 
     public Vehicle(){
@@ -240,7 +295,7 @@ public class Vehicle implements ObjectId{
                 vINNumber, 1100, 1200, 1300, 1000,
                 LocalDate.parse("2019-01-01"), registrationCardIssueDate, "M1",
                 "HOM1234567890", 2, "1000",
-                "450", engineCapacity, enginePower, FuelType.DIESEL,
+                "450", engineCapacity, enginePower, fuelType,
                 "---", 4, 0);
     }
 
@@ -253,13 +308,13 @@ public class Vehicle implements ObjectId{
         this.id = id;
     }
 
-    public Integer getVersion() {
+/*    public Integer getVersion() {
         return version;
     }
 
     public void setVersion(Integer version) {
         this.version = version;
-    }
+    }*/
 
     public String getVehicleType() {
         return vehicleType;

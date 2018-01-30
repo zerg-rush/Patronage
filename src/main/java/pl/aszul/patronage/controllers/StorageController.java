@@ -10,7 +10,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping(value = "/storage", produces = { "application/json", "application/xml" })
-@Api(value = "onlinestore", description = "Controller exposing Storage engine mode", tags = "StorageController")
+@Api(value = "onlinestore", description = "Controller exposing Storage engine mode", tags = "StorageController", position = 1)
 public class StorageController {
 
     @ApiOperation(value = "Show current storage type (H2 vs HashMap)")

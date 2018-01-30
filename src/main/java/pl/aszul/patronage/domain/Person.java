@@ -40,7 +40,7 @@ public class Person implements ObjectId{
     private Gender gender;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-    @ApiModelProperty(notes = "Birth date of person", required = true)
+    @ApiModelProperty(notes = "Birth date of person", required = true, position = 1, example = "2000-01-01", dataType = "")
     private LocalDate birthDate;
 
     @ApiModelProperty(notes = "Personal identification number value (PESEL, NIP, REGON, ID card number, passport number etc.)")
