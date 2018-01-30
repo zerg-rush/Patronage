@@ -16,18 +16,6 @@ Project structure
 ![](images/Project%20structure.png)
 
 
-Selecting storage mode
-------------------------
-
-environment variable H2_ENABLED_STORAGE not set (so it should set H2 mode):  
-![](images/H2_env_var_not_set.png)
-
-environment variable H2_ENABLED_STORAGE set to FALSE:  
-![](images/H2_env_var_false.png)
-
-environment variable H2_ENABLED_STORAGE set to TRUE:  
-![](images/H2_env_var_true.png)
-
 Designated Endpoints
 --------------------
 Swagger2 REST API JSON specification file (available to download at [http://localhost:8080/v2/api-docs](http://localhost:8080/v2/api-docs))
@@ -107,6 +95,15 @@ Environment variable H2_STORAGE_ENABLED set to false in IntelliJ IDE (for tests)
 --------------------------------------------------------------------------------
 ![](images/environment%20setting%20for%20H2%20in%20IntelliJ.png)
 
+
+environment variable H2_ENABLED_STORAGE not set (so it should set H2 mode):  
+![](images/H2_env_var_not_set.png)
+
+environment variable H2_ENABLED_STORAGE set to FALSE:  
+![](images/H2_env_var_false.png)
+
+environment variable H2_ENABLED_STORAGE set to TRUE:  
+![](images/H2_env_var_true.png)
 
 Demo of validating vehicle plate number:
 ---------------------------------------
