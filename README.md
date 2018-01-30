@@ -112,6 +112,6 @@ Demo of validating engine capacity, vehicle brand and number of seats:
 ---------------------------------------
 ![](images/validation_demo_engine_brand_seats.png)
 
-Demo of validating of first registration dates and registration card dates:
+Demo of validating of vehicle first registration dates and registration card dates:
 ---------------------------------------
 ![](images/validation_demo_wrong_dates.png)
