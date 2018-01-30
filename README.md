@@ -95,7 +95,6 @@ Environment variable H2_STORAGE_ENABLED set to false in IntelliJ IDE (for tests)
 --------------------------------------------------------------------------------
 ![](images/environment%20setting%20for%20H2%20in%20IntelliJ.png)
 
-
 environment variable H2_ENABLED_STORAGE not set (so it should set H2 mode):  
 ![](images/H2_env_var_not_set.png)
 
@@ -112,3 +111,7 @@ Demo of validating vehicle plate number:
 Demo of validating engine capacity, vehicle brand and number of seats:
 ---------------------------------------
 ![](images/validation_demo_engine_brand_seats.png)
+
+Demo of validating of first registration dates and registration card dates:
+---------------------------------------
+![](images/validation_demo_wrong_dates.png)
