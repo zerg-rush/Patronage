@@ -115,3 +115,7 @@ Demo of validating engine capacity, vehicle brand and number of seats:
 Demo of validating of vehicle first registration dates and registration card dates:
 ---------------------------------------
 ![](images/validation_demo_wrong_dates.png)
+
+Demo of JSON <-> XML interoperability:
+---------------------------------------
+![](images/demo_JSON_XML_interoperability.png)
