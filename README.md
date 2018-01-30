@@ -61,31 +61,33 @@ IntelliJ REST API assistant tool:
 
 ![](images/IntelliJ%20Test%20REST%20API%20plugin.png)
 
-Swagger2 UI presenting specific HTTP codes fine tuned for each method/endpoint
+
+Swagger2 UI presenting specific HTTP codes fine tuned for each method/endpoint:  
 ---------------------------
+
 add Person method (POST /persons/add, HTTP codes: 201, 400):  
 
 ![](images/HTTP_codes_1.png)
-
+  
 delete Person method (DELETE /persons/delete/{id}, HTTP codes: 404):  
-
+  
 ![](images/HTTP_codes_3.png)
-
+  
 show Person method (GET /persons/show/{id}, HTTP codes: 404):  
-
+  
 ![](images/HTTP_codes_5.png)
-
+  
 update Person method (PUT /persons/update/{id}, HTTP codes: 202, 400, 404):  
-
+  
 ![](images/HTTP_codes_6.png)
  
 
-Swagger2 UI presenting domain model class Person
+Swagger2 UI presenting domain model class Person:  
 -----------------------------------------------
 ![](images/Swagger_model_definition_person.png)
 
 
-Swagger2 UI presenting domain model class Vehicle
+Swagger2 UI presenting domain model class Vehicle:  
 -----------------------------------------------
 ![](images/Swagger_model_definition_vehicle.png)
 
